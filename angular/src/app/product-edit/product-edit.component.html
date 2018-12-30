@@ -1,0 +1,43 @@
+<mat-card>
+  <form #productForm="ngForm" (ngSubmit)="save(productForm.value)">
+    <mat-card-header>
+      <mat-card-title>
+        <h2>{{product ? 'Edit' : 'Add'}} Product</h2>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <input type="hidden" name="id" [(ngModel)]="product.id">
+      <mat-form-field>
+        <input matInput placeholder="Product Name" [(ngModel)]="product.name" required name="name">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Product Description" [(ngModel)]="product.description" required name="description">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Product Price" [(ngModel)]="product.price" required name="price">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Product Amount" [(ngModel)]="product.amount" required name="amount">
+      </mat-form-field>
+
+      <mat-form-field class="col-xs-12">
+        <input matInput [(ngModel)]="product.dateAdded" [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" placeholder="Date Added"
+          name="dateAdded" required>
+        <owl-date-time #dt2></owl-date-time>
+        <mat-error>
+          Required
+        </mat-error>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!productForm.form.valid">Save
+      </button>
+      <button mat-raised-button color="secondary" (click)="remove(product.id)" *ngIf="product.id" type="button">Delete
+      </button>
+      <a mat-button routerLink="/product-list">Cancel</a>
+    </mat-card-actions>
+    <mat-card-footer>
+
+    </mat-card-footer>
+  </form>
+</mat-card>
